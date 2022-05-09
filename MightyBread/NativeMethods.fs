@@ -32,7 +32,13 @@ module User32 =
     [<DllImport("user32.dll")>]
     extern IntPtr GetShellWindow()
     
+    [<DllImport("user32.dll")>]
+    extern IntPtr GetDesktopWindow()
+    
 module GDI32 =
+    [<Literal>]
+    let SRCCOPY = 0x00CC0020
+    
     [<DllImport("gdi32.dll")>]
     extern bool BitBlt(IntPtr hObject, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hObjectSource, int nXSrc, int nYSrc, int dwRop)
     
