@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Utils.fs" />
+        <Compile Include="NativeMethods.fs" />
+        <Compile Include="OCR.fs" />
+        <Compile Include="ScreenCapture.fs" />
+        <Compile Include="Program.fs" />
+        <Content Include="phototest.tif" />
+        <Content Include="tessdata\eng.traineddata" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Tesseract" Version="4.1.1" />
+      <PackageReference Include="Tesseract.Drawing" Version="4.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    </ItemGroup>
+</Project>
