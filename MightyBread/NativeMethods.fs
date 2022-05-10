@@ -1,11 +1,19 @@
 ﻿namespace NativeMethods
 open System
-open System.Drawing
 open System.Runtime.InteropServices
 open System.Text
-    
-    
+
+[<RequireQualifiedAccess>]
 module User32 =
+    [<Struct; StructLayout(LayoutKind.Sequential)>]
+    type Rect =
+        val Left: int
+        val Top: int
+        val Right: int
+        val Bottom: int
+        member this.Width with get () = this.Right - this.Left
+        member this.Height with get () = this.Bottom - this.Top
+
     type EnumWindowsFunc = delegate of IntPtr * int -> bool
 
     [<DllImport("user32.dll")>]
@@ -15,7 +23,7 @@ module User32 =
     extern IntPtr ReleaseDC(IntPtr windowPointer, IntPtr hDC)
 
     [<DllImport("user32.dll")>]
-    extern IntPtr GetWindowRect(IntPtr windowPointer, Rectangle rect)
+    extern IntPtr GetWindowRect(IntPtr windowPointer, Rect& rect)
 
     [<DllImport("user32.dll")>]
     extern bool EnumWindows(EnumWindowsFunc, int lParam)
@@ -34,10 +42,10 @@ module User32 =
     
     [<DllImport("user32.dll")>]
     extern IntPtr GetDesktopWindow()
-    
+
+[<RequireQualifiedAccess>]
 module GDI32 =
-    [<Literal>]
-    let SRCCOPY = 0x00CC0020
+    let [<Literal>] SRCCOPY = 0x00CC0020
     
     [<DllImport("gdi32.dll")>]
     extern bool BitBlt(IntPtr hObject, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hObjectSource, int nXSrc, int nYSrc, int dwRop)

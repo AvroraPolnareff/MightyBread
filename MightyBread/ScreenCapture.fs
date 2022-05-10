@@ -4,7 +4,10 @@ open System
 open System.Drawing
 open System.Drawing.Imaging
 open System.Text
+open Microsoft.FSharp.Core
 open NativeMethods
+
+
 
 let getOpenWindows () =
     let shellWindow = User32.GetShellWindow()
@@ -33,8 +36,10 @@ let captureWindow (windowPointer: IntPtr) =
     // get te hDC of the target window
     let hdcSrc = User32.GetWindowDC(windowPointer)
     // get the size
-    let windowRect = Rectangle()
-    User32.GetWindowRect(windowPointer, windowRect) |> ignore
+    
+    let mutable windowRect = User32.Rect()
+    
+    User32.GetWindowRect(windowPointer, &windowRect) |> ignore
     // create a device context we can copy to
     let hdcDest = GDI32.CreateCompatibleDC(hdcSrc)
     // create a bitmap we can copy it to,
@@ -43,6 +48,7 @@ let captureWindow (windowPointer: IntPtr) =
     // select the bitmap object
     let hOld = GDI32.SelectObject(hdcDest, hBitmap)
     // bitblt over
+    printfn $"{windowRect}"
     GDI32.BitBlt(hdcDest, 0, 0, windowRect.Width, windowRect.Height, hdcSrc, 0, 0, GDI32.SRCCOPY) |> ignore
     // restore selection
     GDI32.SelectObject(hdcDest, hOld) |> ignore
@@ -59,3 +65,4 @@ let captureScreen () =
 let captureWindowToFile (windowPointer: IntPtr) (filename: string) (format: ImageFormat) =
     let img = captureWindow(windowPointer)
     img.Save(filename, format)
+
