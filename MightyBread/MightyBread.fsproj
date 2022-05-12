@@ -10,6 +10,8 @@
         <Compile Include="NativeMethods.fs" />
         <Compile Include="OCR.fs" />
         <Compile Include="ScreenCapture.fs" />
+        <Compile Include="Domain.fs" />
+        <Compile Include="WarframeScreenService.fs" />
         <Compile Include="Program.fs" />
         <Content Include="phototest.tif" />
         <Content Include="tessdata\eng.traineddata" />
@@ -17,6 +19,7 @@
 
     <ItemGroup>
       <PackageReference Include="FSharp.Control.Reactive" Version="5.0.5" />
+      <PackageReference Include="FSharp.Data" Version="4.2.8" />
       <PackageReference Include="Tesseract" Version="4.1.1" />
       <PackageReference Include="Tesseract.Drawing" Version="4.1.1" />
     </ItemGroup>

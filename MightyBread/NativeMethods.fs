@@ -42,6 +42,12 @@ module User32 =
     
     [<DllImport("user32.dll")>]
     extern IntPtr GetDesktopWindow()
+    
+    [<DllImport("user32.dll", SetLastError = true)>]
+    extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow)
+    
+    [<DllImport("user32.dll", CharSet = CharSet.Auto)>]
+    extern IntPtr SendMessage(IntPtr windowPointer, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
 [<RequireQualifiedAccess>]
 module GDI32 =

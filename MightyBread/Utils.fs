@@ -1,4 +1,4 @@
-﻿[<Microsoft.FSharp.Core.AutoOpen>]
+﻿[<AutoOpen>]
 module Utils
 
 let (^) f x = f x
