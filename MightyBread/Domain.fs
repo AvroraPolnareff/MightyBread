@@ -11,6 +11,7 @@ module FinalData =
 
     type Riven =
         { ImageUrl: Uri
+          Price: int option
           RivenStats: RivenStat list }
 
     type MessageInfo =
